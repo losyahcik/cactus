@@ -10,9 +10,9 @@
 <body>
     <header>
     <?php
-    
     include 'layouts/header.php';
     include 'layouts/content_buy.php';
+    include 'layouts/basket_update.php';
     ?>
     </header>
     <main>
@@ -32,7 +32,6 @@
     </main>
     <footer>
     <?php
-    include 'layouts/basket_update.php';
     include 'layouts/footer.php';
     ?>
     </footer>
