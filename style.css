@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+a{
+    color: #59B755;
+    text-decoration: none;
+}
+
+header{
+    height: 100px;
+}
+
+.header{
+    padding-left: 35px;
+    padding-right: 35px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+
+.logo{
+    font-weight: bold;
+    font-size: 35px;
+
+}
+.cost{
+    font-size: 30px;
+    color: #59B755;
+    font-weight: 700;
+}
+.logo_header {
+    color: #59B755;
+}
+
+.basket{
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.basket_svg{
+    fill: #59B755;
+}
+
+.footer{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: #59B755;
+    color: #fff;
+    justify-content: space-between;
+    padding: 0px 35px 0px 35px;
+}
+
+.tel{
+    font-size: 23px;
+    font-size: 700;
+}
+
+
+.wrapp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    min-height: 83vh;
+    max-height: fit-content;
+    font-family: "Roboto", sans-serif;
+}
+
+.wrapp_user{
+    align-items: baseline;
+    justify-content: flex-start;
+    padding-left: 40px;
+
+}
+
+.user_info{
+    font-family: "Roboto", sans-serif;
+    color: #59B755;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.user_basket a{
+    margin-right: 20px;
+
+}
+
+.wrapp a{
+    font-size: 25px;
+}
+
+.main h1{
+    color: #59B755;
+
+}
+
+form{
+    padding: 15px 50px 15px 50px;
+    width: 500px;
+    height: 400px;
+    border: 3px #59B755 solid;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.form_input{
+    all: unset;
+    width: 400px;
+    height: 50px;
+    padding-left: 14px;
+    border: 2px #59B755 solid;
+    border-radius: 15px;
+    color: #59B755;
+    background-color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    
+}
+
+.form_input[type=text]::placeholder, .form_input[type=email]::placeholder, .form_input[type=password]::placeholder{
+    color: #59B755;
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+}
+
+.submit{
+    background-color:#59B755 ;
+    color: #fff;
+    text-align: center;
+}
+
+.form_avt{
+    justify-content: flex-start;
+}
+
+.form_avt input{
+    margin-bottom: 25px;
+}
+
+.wrapp_index{
+    padding-left: 45px;
+    padding-right: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 83vh;
+    max-height: fit-content;
+}
+
+.cactus_wrapp{
+    color: #59B755;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    transition: all .2s ease-out;
+}
+
+.cactus_wrapp:hover, .buy_but:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.cactus_p{
+ font-size: 30px;
+}
+
+.cactus_image{
+    width: 350px;
+    max-height:150px;
+    border-radius: 15px;
+    border: 3px #59B755 solid;
+}
+
+.buy_wrapp{
+    display: flex;
+    padding-left: 40px;
+    padding-right: 190px;
+    min-height: 83vh;
+    color: #59B755;
+    justify-content: space-between;
+}
+
+.buy_photo{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+
+.buy_photo img{
+    width: 400px;
+    height: 600px;
+    border: 3px #59B755 solid;
+    border-radius: 15px;
+}
+
+.buy_description{
+    margin-left: 40px;
+}
+
+.p_description{
+    font-size: 25px;
+}
+
+.p_cost{
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.buy_description p{
+    margin-top: 25px;
+}
+
+.buy_but{
+    color: #fff;
+    background-color: #59B755;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    margin-top: 25px;
+    border-radius: 15px;
+    font-size: 30px;
+    font-weight: medium;
+    transition: all .2s ease-out;
+    border: none;
+}
+
+.basket_form{
+    border: none;
+    height: fit-content;
+}
+
+.cactus_wrapp_user{
+    flex-direction: row;
+    width: 100%;
+}
+
+.desc{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+
+}
+
+.cactus_wrapp_user img{
+    width: 350px;
+    height: 100%;   
+}
+
+.cactus_wrapp_user{
+    color: #59B755;
+    display: flex;
+    margin-top: 60px;
+}
+
+.but_bus{
+    width: 400px;
+    height: 50px;
+}
+
+.busket_bus{
+    padding: 0;
+    margin: 0;
+    align-items: baseline;
+}
+
+.orders_but{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cost_bus{
+    color: #59B755;
+    font-weight: 700;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapp_bus{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
