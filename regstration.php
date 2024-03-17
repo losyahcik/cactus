@@ -33,7 +33,6 @@
     include 'layouts/footer.php';
     ?>
     <script>
-
         const passwordField1 = document.querySelector('#pass1');
         const passwordField2 = document.querySelector('#pass2');
         const submitButton = document.querySelector('#submitButton');
@@ -44,7 +43,6 @@
 
         if (password1 !== password2) {
             submitButton.disabled = true;  // Блокируем кнопку "submit"
-            submit
         } else {
             submitButton.disabled = false;  // Разблокируем кнопку "submit"
         }

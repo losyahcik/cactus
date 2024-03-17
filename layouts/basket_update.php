@@ -1,58 +1,48 @@
 <?
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
     if (!isset($_COOKIE['user_name']) || !isset($_COOKIE['user_email'])) {
-        header("Location: regstration.php");
+        header("Location: ../regstration.php");
         exit;
     } else {
-    include "bd.php";
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM user WHERE name = :name AND email = :email";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':name', $_COOKIE['user_name']);
-    $stmt->bindParam(':email', $_COOKIE['user_email']);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($row) {
-        // Получение значения столбца basket
-        $basket = $row['basket'];
-    
-        // Проверка, является ли ячейка пустой или равной null
-        if (empty($basket) || $basket == null) {
-            // Создание массива с записью id страницы
-            $basket_array = array($id);
-    
-            // Преобразование массива в строку
-            $basket_string = implode(',', $basket_array);
-    
-            // Обновление значения столбца basket
-            $sql = "UPDATE user SET basket = :basket WHERE name = :name AND email = :email";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':basket', $basket_string);
+        if (isset($_COOKIE['user_name'])){
+            $id_cactus = $_POST['hidden'];
+            include 'bd.php';
+            $user_name = $_COOKIE['user_name'];
+            $user_email = $_COOKIE['user_email'];
+            $stmt = $conn->prepare("SELECT id_user FROM user WHERE name = :name AND email = :email");
             $stmt->bindParam(':name', $user_name);
             $stmt->bindParam(':email', $user_email);
             $stmt->execute();
-        } else {
-            // Преобразование строки из ячейки в массив
-            $basket_array = explode(',', $basket);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            if ($row) {
+                $id_user = $row['id_user'];
+            }
+        
+            $query = "SELECT * FROM basket WHERE id_user = :id_user AND id_cactus = :id_cactus";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':id_cactus', $id_cactus);
+            $stmt->execute();
             
-            // Проверка наличия id страницы в массиве
-            if (!in_array($id, $basket_array)) {
-                // Добавление id страницы в массив
-                $basket_array[] = $id;
-    
-                // Преобразование массива в строку
-                $basket_string = implode(',', $basket_array);
-    
-                // Обновление значения столбца basket
-                $sql = "UPDATE user SET basket = :basket WHERE name = :name AND email = :email";
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $number = $row['number'] + 1;
+                $sql = "UPDATE basket SET number = :number WHERE id_user = :id_user AND id_cactus = :id_cactus";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':basket', $basket_string);
-                $stmt->bindParam(':name', $_COOKIE['user_name']);
-                $stmt->bindParam(':email',  $_COOKIE['user_email']);
+                $stmt->bindParam(':number', $number);
+                $stmt->bindParam(':id_user', $id_user);
+                $stmt->bindParam(':id_cactus', $id_cactus);
+                $stmt->execute();
+            } else {
+                $sql = "INSERT INTO basket (id_user, id_cactus, number) VALUES (:id_user, :id_cactus, 1)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':id_user', $id_user);
+                $stmt->bindParam(':id_cactus', $id_cactus);
                 $stmt->execute();
             }
         }
-    }
+        header('Location: ../buy.php?id='.$id_cactus);
+        $conn=null;
     }
 }

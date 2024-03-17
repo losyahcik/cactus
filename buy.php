@@ -12,14 +12,14 @@
     <?php
     include 'layouts/header.php';
     include 'layouts/content_buy.php';
-    include 'layouts/basket_update.php';
     ?>
     </header>
     <main>
         <div class="buy_wrapp">
             <div class="buy_photo">
                 <img class="cactus_image_buy" src="data:image/jpeg;base64, <?php print_r($photo)?>"/>
-                <form method="POST" action="" class="basket_form">
+                <form method="POST" action="layouts/basket_update.php" class="basket_form">
+                    <input type="hidden" name="hidden" value="<?php echo $_GET['id'] ?>">
                     <button type="submit" class='buy_but' name="buttonn">Добавить в корзину</button>
                 </form>
             </div>

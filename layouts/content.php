@@ -11,7 +11,7 @@ try {
     if (count($result) > 0) {
         // Вывод данных в виде <div> с <p> для "title" и "cost" и <img> для "photo"
         foreach ($result as $row) {
-            echo '<div class="cactus_wrapp" onclick="redirectToBuyPage('.$row['id'].')" id='.$row['id'].' />';
+            echo '<div class="cactus_wrapp" onclick="redirectToBuyPage('.$row['id_cactus'].')" id='.$row['id_cactus'].' />';
             echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($row['photo']) . '" />';
             echo '<p class="cactus_p cactus_title">' . $row['title'] . '</p>';
             echo '<p class="cactus_p cactus_cost">' . $row['cost'] .'₽'. '</p>';

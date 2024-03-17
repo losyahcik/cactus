@@ -1,88 +1,82 @@
 <?
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
-    if (isset($_COOKIE['user_name']) ||  isset($_COOKIE['user_email'])) {
-        
-        include 'bd.php';
-
-        $sql = "SELECT basket, orders FROM user WHERE name = :name AND email = :email";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':name', $_COOKIE['user_name']);
-        $stmt->bindValue(':email', $_COOKIE['user_email']);
+if (isset($_COOKIE['user_name']) || isset($_COOKIE['user_email'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
+    include 'bd.php';
+    $user_email = $_COOKIE['user_email'];
+    $user_name = $_COOKIE['user_name'];
+    
+    $query = "SELECT id_user FROM user WHERE name = :user_name AND email = :user_email";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':user_name', $user_name);
+    $stmt->bindParam(':user_email', $user_email);
+    $stmt->execute();
+    $user_result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $id_user = $user_result['id_user'];
+    
+    $basket_query = $conn->prepare("SELECT * FROM basket WHERE id_user = :id_user");
+    $basket_query->bindParam(':id_user', $id_user);
+    $basket_query->execute();
+    
+    while($basket_row = $basket_query->fetch(PDO::FETCH_ASSOC)){
+        $id_cactus = $basket_row['id_cactus'];
+        $number = $basket_row['number'];
+    
+        $insert_query = "INSERT INTO orders (id_user, id_cactus, number) VALUES (:id_user, :id_cactus, :number)";
+        $stmt = $conn->prepare($insert_query);
+        $stmt->bindParam(':id_user', $id_user);
+        $stmt->bindParam(':id_cactus', $id_cactus);
+        $stmt->bindParam(':number', $number);
         $stmt->execute();
-        $user = $stmt->fetch();
+    
+        $delete_query = "DELETE FROM basket WHERE id_user = :id_user";
+        $stmt = $conn->prepare($delete_query);
+        $stmt->bindParam(':id_user', $id_user);
+        $stmt->execute();
+    }}}
 
-        $basketString = $user['basket'];
-        $orderString = $user['orders'];
-        if (!empty($orderString) || !($orderString == null)){
-            $basketString = explode(',', $basketString);
-            $orderString = explode(',', $orderString);
-            $merged_list = array_merge($basketString, $orderString);
-            $merged_list = array_unique($merged_list);
-            $orderString = implode(',', $merged_list);
-            $basketString ="";  
-
-            $sql = "UPDATE user SET orders = :orders, basket = :basket WHERE name = :name AND email = :email";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':orders', $orderString);
-            $stmt->bindParam(':basket', $basketString);
-            $stmt->bindValue(':name', $_COOKIE['user_name']);
-            $stmt->bindValue(':email',$_COOKIE['user_email']);
-            $stmt->execute();
-
-        }else{
-            $sql = "UPDATE user SET orders = basket, basket = '' WHERE name = :name AND email = :email";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':name', $_COOKIE['user_name']);
-            $stmt->bindValue(':email',$_COOKIE['user_email']);
-            $stmt->execute(); 
-        }
-
-        
-        order_user();
-    } 
-}else{
-        order_user();
-    }
+order_user();
+$conn = null;
 
 function order_user(){
     include 'bd.php';
+    $user_name = $_COOKIE['user_name'];
+    $user_email = $_COOKIE['user_email'];
 
-$sql = "SELECT * FROM user WHERE name = :name AND email = :email";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(':name', $_COOKIE['user_name']);
-$stmt->bindValue(':email', $_COOKIE['user_email']);
-$stmt->execute();
-$user = $stmt->fetch(); 
+    $query_user = "SELECT id_user FROM user WHERE name = :name AND email = :email";
+    $stmt_user = $conn->prepare($query_user);
+    $stmt_user->bindParam(':name', $user_name);
+    $stmt_user->bindParam(':email', $user_email);
+    $stmt_user->execute();
+    $user = $stmt_user->fetch(PDO::FETCH_ASSOC);
 
-if (!$user) {
-    die("Пользователь не найден");
-}
+    if ($user) {
+        $user_id = $user['id_user'];
 
-if($user['orders'] !== null){
-$basketArray = explode(',', $user['orders']);
+        $query_basket = "SELECT id_order, number, id_cactus FROM orders WHERE id_user = :user_id";
+        $stmt_basket = $conn->prepare($query_basket);
+        $stmt_basket->bindParam(':user_id', $user_id);
+        $stmt_basket->execute();
 
-foreach ($basketArray as $productId) {
-    // Поиск записи товара в таблице cactus
-    $sql = "SELECT * FROM cactus WHERE id = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(':id', $productId);
-    $stmt->execute();
-    $product = $stmt->fetch();
+        while ($row_basket = $stmt_basket->fetch(PDO::FETCH_ASSOC)) {
+            $id_cactus = $row_basket['id_cactus'];
+            
+            // $number = $row_basket['number'];
 
-    // Проверка наличия записи товара
-    if (!$product) {
-        continue;
-    }
+            $query_product = "SELECT * FROM cactus WHERE id_cactus = :id_cactus";
+            $stmt_product = $conn->prepare($query_product);
+            $stmt_product->bindParam(':id_cactus', $id_cactus);
+            $stmt_product->execute();
+            $row_product = $stmt_product->fetch(PDO::FETCH_ASSOC);
     
     // Формирование информации о товаре
     echo '<div class="cactus_wrapp_user" />';
     echo '<div class="cactus_wrapp_img" />';
-    echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($product['photo']) . '" />';
+    echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($row_product['photo']) . '" />';
     echo '</div>';
     echo '<div class="desc">';
-    echo '<p class="cactus_p cactus_title">' . $product['title'] . '</p>';
-    echo '<p class="cactus_p cactus_cost">' . $product['cost'] .'₽'. '</p>';
+    echo '<p class="cactus_p cactus_title">' . $row_product['title'] . '</p>';
+    echo '<p class="cactus_p cactus_cost">' . $row_product['cost'] .'₽'.'(1 шт.)'. '</p>';
+    echo '<p class="cactus_p cactus_cost">' . $row_basket['number'] .'шт.'. '</p>';
     echo '<p class="cactus_p"> Заказ в работе</p>';
     echo '<form method="POST" action="" class="basket_form busket_bus">';          
     echo '</form>';          

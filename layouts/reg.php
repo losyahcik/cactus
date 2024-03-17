@@ -22,3 +22,4 @@ try {
 } catch(PDOException $e) {
     echo "Ошибка подключения: " . $e->getMessage();
 }
+$conn=null;

@@ -1,6 +1,5 @@
 <?php
 require 'bd.php';
-
 try {
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,11 +19,9 @@ try {
         } else {
             echo'(';
         }
-        
-
     }
 } catch(PDOException $e) {
     echo "Ошибка подключения: " . $e->getMessage();
 }
 
-
+$conn=null;

@@ -1,5 +1,5 @@
 <?php
-
+include "bd.php";
 $stmt = $conn->prepare('SELECT password, name, email FROM user WHERE name = :name  AND email = :email');
 
 $stmt->bindParam(':email', $_COOKIE['user_email'], PDO::PARAM_STR);
@@ -16,3 +16,4 @@ if ($result) {
 } else {
     // Запись не найдена, обработайте этот случай
 }
+$conn=null;

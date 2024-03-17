@@ -20,4 +20,5 @@ if (!isset($_COOKIE['user_name']) || !isset($_COOKIE['user_email'])) {
     } else {
         echo 'regstration.php';
     }
+    $conn=null;
 }

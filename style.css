@@ -294,6 +294,7 @@ form{
     border: none;
     margin: 0;
     padding: 0;
+    height: auto;
 }
 
 .cost_bus{
@@ -309,6 +310,6 @@ form{
 .wrapp_bus{
    display: flex;
    flex-direction: row;
-   align-items: center;
+   align-items: center;    
 }
 
