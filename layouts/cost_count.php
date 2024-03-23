@@ -1,8 +1,9 @@
 <?
-if (isset($_COOKIE['user_name'])) {
+session_start();
+if (isset($_SESSION['user_name'])) {
     include 'bd.php';
-    $user_email = $_COOKIE['user_email'];
-    $user_name = $_COOKIE['user_name'];
+    $user_email = $_SESSION['user_email'];
+    $user_name = $_SESSION['user_name'];
 
     $query = "SELECT id_user FROM user WHERE email = :user_email AND name = :user_name";
     $stmt = $conn->prepare($query);

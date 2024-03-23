@@ -15,8 +15,11 @@ try {
         
         // echo "Данные успешно сохранены в таблицу 'user'.";
 //создание куки
-        setcookie("user_name", $name, 0, '/');
-        setcookie("user_email", $email, 0, '/');
+        session_start();
+        $_SESSION['user_email']=$email;
+        $_SESSION['user_name'] = $name;
+        // setcookie("user_name", $name, 0, '/');
+        // setcookie("user_email", $email, 0, '/');
     }
     
 } catch(PDOException $e) {

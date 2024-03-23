@@ -1,4 +1,6 @@
-<?if (isset($_COOKIE['user_name']) ||  isset($_COOKIE['user_email'])) {
+<?
+session_start();
+if (isset($_SESSION['user_name']) ||  isset($_SESSION['user_email'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
         include "bd.php";
 
@@ -29,8 +31,8 @@ $conn=null;
 
 function basket_update(){
     include 'bd.php';
-    $user_name = $_COOKIE['user_name'];
-    $user_email = $_COOKIE['user_email'];
+    $user_name = $_SESSION['user_name'];
+    $user_email = $_SESSION['user_email'];
 
     $query_user = "SELECT id_user FROM user WHERE name = :name AND email = :email";
     $stmt_user = $conn->prepare($query_user);

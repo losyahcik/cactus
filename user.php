@@ -27,7 +27,7 @@ include 'layouts/user_info.php';
         <div class="user_basket">
             <a href="busket.php">Корзина</a>
             <a href="orders.php">Заказы</a>
-            <form method="post" action="index.php" class="orders_but">
+            <form method="post" action="layouts/out.php" class="orders_but">
                 <button type="submit" class='buy_but user_but' name="buttonn">Выйти из профиля</button>
             </form>
         </div>

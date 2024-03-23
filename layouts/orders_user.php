@@ -1,9 +1,10 @@
 <?
-if (isset($_COOKIE['user_name']) || isset($_COOKIE['user_email'])) {
+session_start();
+if (isset($_SESSION['user_name']) || isset($_SESSION['user_email'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
     include 'bd.php';
-    $user_email = $_COOKIE['user_email'];
-    $user_name = $_COOKIE['user_name'];
+    $user_email = $_SESSION['user_email'];
+    $user_name = $_SESSION['user_name'];
     
     $query = "SELECT id_user FROM user WHERE name = :user_name AND email = :user_email";
     $stmt = $conn->prepare($query);
@@ -20,12 +21,15 @@ if (isset($_COOKIE['user_name']) || isset($_COOKIE['user_email'])) {
     while($basket_row = $basket_query->fetch(PDO::FETCH_ASSOC)){
         $id_cactus = $basket_row['id_cactus'];
         $number = $basket_row['number'];
+        $time = new DateTime();
+        $time = $time->format('Y-m-d H:i');
     
-        $insert_query = "INSERT INTO orders (id_user, id_cactus, number) VALUES (:id_user, :id_cactus, :number)";
+        $insert_query = "INSERT INTO orders (id_user, id_cactus, number, status, time) VALUES (:id_user, :id_cactus, :number, 0, :time)";
         $stmt = $conn->prepare($insert_query);
         $stmt->bindParam(':id_user', $id_user);
         $stmt->bindParam(':id_cactus', $id_cactus);
         $stmt->bindParam(':number', $number);
+        $stmt->bindParam(':time', $time);
         $stmt->execute();
     
         $delete_query = "DELETE FROM basket WHERE id_user = :id_user";
@@ -39,8 +43,8 @@ $conn = null;
 
 function order_user(){
     include 'bd.php';
-    $user_name = $_COOKIE['user_name'];
-    $user_email = $_COOKIE['user_email'];
+    $user_name = $_SESSION['user_name'];
+    $user_email = $_SESSION['user_email'];
 
     $query_user = "SELECT id_user FROM user WHERE name = :name AND email = :email";
     $stmt_user = $conn->prepare($query_user);
@@ -52,13 +56,20 @@ function order_user(){
     if ($user) {
         $user_id = $user['id_user'];
 
-        $query_basket = "SELECT id_order, number, id_cactus FROM orders WHERE id_user = :user_id";
+        $query_basket = "SELECT id_order, number,status, id_cactus  FROM orders WHERE id_user = :user_id";
         $stmt_basket = $conn->prepare($query_basket);
         $stmt_basket->bindParam(':user_id', $user_id);
         $stmt_basket->execute();
 
         while ($row_basket = $stmt_basket->fetch(PDO::FETCH_ASSOC)) {
             $id_cactus = $row_basket['id_cactus'];
+            $status = $row_basket['status'];
+            $status_info = '';
+            if ($status == 0){
+                $status_info = 'Ожидает подтверждения';
+            }elseif($status == 1){
+                $status_info = 'Заказ в работе';
+            };
             
             // $number = $row_basket['number'];
 
@@ -77,7 +88,7 @@ function order_user(){
     echo '<p class="cactus_p cactus_title">' . $row_product['title'] . '</p>';
     echo '<p class="cactus_p cactus_cost">' . $row_product['cost'] .'₽'.'(1 шт.)'. '</p>';
     echo '<p class="cactus_p cactus_cost">' . $row_basket['number'] .'шт.'. '</p>';
-    echo '<p class="cactus_p"> Заказ в работе</p>';
+    echo '<p class="cactus_p">'.$status_info.'</p>';
     echo '<form method="POST" action="" class="basket_form busket_bus">';          
     echo '</form>';          
     echo '</div>';

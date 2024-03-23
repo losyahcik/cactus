@@ -1,14 +1,15 @@
 <?
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buttonn'])) {
-    if (!isset($_COOKIE['user_name']) || !isset($_COOKIE['user_email'])) {
+    if (!isset($_SESSION['user_name']) || !isset($_SESSION['user_email'])) {
         header("Location: ../regstration.php");
         exit;
     } else {
-        if (isset($_COOKIE['user_name'])){
+        if (isset($_SESSION['user_name'])){
             $id_cactus = $_POST['hidden'];
             include 'bd.php';
-            $user_name = $_COOKIE['user_name'];
-            $user_email = $_COOKIE['user_email'];
+            $user_name = $_SESSION['user_name'];
+            $user_email = $_SESSION['user_email'];
             $stmt = $conn->prepare("SELECT id_user FROM user WHERE name = :name AND email = :email");
             $stmt->bindParam(':name', $user_name);
             $stmt->bindParam(':email', $user_email);
