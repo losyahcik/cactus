@@ -23,6 +23,7 @@
             <input class="form_input" type="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <input class="form_input" type="password" id="pass1" name="password" placeholder="Пароль" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="минимум 8 символов, 4 цифры и 4 буквы">
             <input class="form_input" type="password" id="pass2" placeholder="Повторите пароль" required>
+            <p class="error">Пароли не совпадают</p>
             <button type="submit" id="submitButton" class="submit form_input" name="register" value="Зарегестрироваться">Зарегестрироваться</button>
             </form>
             <a href="avtoristion.php">Есть профиль? Авторизоваться</a>
@@ -36,6 +37,7 @@
         const passwordField1 = document.querySelector('#pass1');
         const passwordField2 = document.querySelector('#pass2');
         const submitButton = document.querySelector('#submitButton');
+        const error = document.querySelector('.error');
 
         function checkPasswords() {
         const password1 = passwordField1.value;
@@ -43,8 +45,22 @@
 
         if (password1 !== password2) {
             submitButton.disabled = true;  // Блокируем кнопку "submit"
+            error.style.display = 'block';
+            submitButton.addEventListener('mouseover', function() {
+                submitButton.style.cursor = 'not-allowed';
+            });
+            submitButton.addEventListener('mouseout', function() {
+                submitButton.style.cursor = 'auto';
+            });
         } else {
             submitButton.disabled = false;  // Разблокируем кнопку "submit"
+            error.style.display = 'none';
+            submitButton.addEventListener('mouseover', function() {
+                submitButton.style.cursor = 'pointer';
+            });
+            submitButton.addEventListener('mouseout', function() {
+                submitButton.style.cursor = 'auto';
+            });
         }
     }
 

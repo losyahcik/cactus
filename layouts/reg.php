@@ -1,7 +1,6 @@
 <?php
 require 'bd.php';
 try {
-    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST["name"];
         $email = $_POST["email"];
@@ -13,13 +12,10 @@ try {
         $stmt->bindParam(':password', $password);
         $stmt->execute();
         
-        // echo "Данные успешно сохранены в таблицу 'user'.";
-//создание куки
         session_start();
         $_SESSION['user_email']=$email;
         $_SESSION['user_name'] = $name;
-        // setcookie("user_name", $name, 0, '/');
-        // setcookie("user_email", $email, 0, '/');
+
     }
     
 } catch(PDOException $e) {

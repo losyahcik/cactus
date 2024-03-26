@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "bd.php";
+require "bd.php";
 $stmt = $conn->prepare('SELECT password, name, email FROM user WHERE name = :name  AND email = :email');
 
 $stmt->bindParam(':email', $_SESSION['user_email'], PDO::PARAM_STR);
