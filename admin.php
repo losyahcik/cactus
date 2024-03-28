@@ -38,9 +38,8 @@ include 'layouts/header.php';
         <div class="admin_menu_wrapp">
             <p class="title_admin">Управление аккаунтами</p>
             <p class="admin_select" onclick=redirectToAdmin(6)>Просмотреть аккаунты</p>
-            <p class="admin_select" onclick=redirectToAdmin(7)>Удалить аккаунты</p>
-            <p class="admin_select" onclick=redirectToAdmin(8)>Добавить аккаунты</p>
-            <p class="admin_select" onclick=redirectToAdmin(9)>Редактировать аккаунт</p>
+            <p class="admin_select" onclick=redirectToAdmin(7)>Редактировать/Удалить аккаунты</p>
+            <p class="admin_select" onclick=redirectToAdmin(8)>Добавить аккаунт</p>
         </div>
     </div>
     <form method="post" action="layouts/out.php" class="orders_but">

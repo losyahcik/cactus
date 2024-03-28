@@ -24,9 +24,30 @@ include 'layouts/header.php';
     <a class="admin_href" href="admin.php"><h1>Админская панель</h1></a>
     <?
     if($id_page==1){
-        echo"<div class='wrapp_index'>";
-        include_once "layouts/content.php";
-        echo"</div>";
+        include "layouts/bd.php";
+        $stmt = $conn->prepare("SELECT * FROM cactus");
+        $stmt->execute();
+        $cactus = $stmt->fetchAll();
+        ?>
+        <table class="admin_table">
+            <tr>
+                <th class="admin_th">id товара</th>
+                <th class="admin_th">Название</th>
+                <th class="admin_th">Описание</th>
+                <th class="admin_th">цена</th>
+                <th class="admin_th">Фото</th>
+            </tr>
+            <?php foreach ($cactus as $cactus): ?>
+            <tr class="tr_admin">
+                <td class='td_admin'><? echo $cactus['id_cactus']; ?></td>
+                <td class='td_admin'><? echo $cactus['title']; ?></td>
+                <td class='td_desc td_admin'><? echo $cactus['description']; ?></td>
+                <td class='td_admin '><? echo $cactus['cost']; ?></td>
+                <td class='td_admin'><?echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($cactus['photo']) . '" />';?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php
     }elseif($id_page==2){
         include "layouts/bd.php";
         $stmt = $conn->prepare("SELECT * FROM cactus");
@@ -36,7 +57,7 @@ include 'layouts/header.php';
         <div>
         <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus" enctype="multipart/form-data">
             <input type="hidden"  name="id_cactus" value="<?= $cactus['id_cactus'] ?>">
-            <input type="hidden" name="id_page" value="<?$id_page?>">
+            <input type="hidden" name="id_page" value="<?=$id_page?>">
             <?echo'<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($cactus['photo']) . '" />';?>
             <div class="">
             <p>Название</p>
@@ -56,11 +77,11 @@ include 'layouts/header.php';
         <button type="submit" name="submit_admin" value="delete">Удалить товар</button>
         </form>
         <?php endforeach;
-    }elseif($id_page==3){
-        include "layouts/bd.php";   
+    }elseif($id_page==3){  
         ?>
         <div class='wrapp_create'>
             <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus_form" enctype="multipart/form-data">
+                <input type="hidden" name="id_page" value="<?=$id_page?>">
                 <div class="change_cactus">
                 <input type="hidden"  name="id_cactus">
                 <input type="hidden" name="id_page">
@@ -112,6 +133,7 @@ include 'layouts/header.php';
                 <td class='td_admin'><?
                     if($order['status']==0){?>
                         <form action="layouts/change_delete_cactus.php" method="post" class="status_form">
+                            <input type="hidden" name="id_page" value="<?=$id_page?>">
                             <input type="hidden" name='id_order' value='<?=$order['id_order'];?>'>
                             <button type="submit" class="" name="submit_admin" value="status">Принять в работу</button>
                         </form><?
@@ -124,17 +146,110 @@ include 'layouts/header.php';
             <?php endforeach; ?>
         </table>
         <?php
-        
     }elseif($id_page==5){
-        echo"11";
+        include "layouts/bd.php";
+        $stmt = $conn->prepare("SELECT * FROM basket");
+        $stmt->execute();
+        $baskets = $stmt->fetchAll();
+        ?>
+        <table class="admin_table">
+            <tr>
+                <th class="admin_th">id корзины</th>
+                <th class="admin_th">id пользователя</th>
+                <th class="admin_th">Товар</th>
+                <th class="admin_th">Количество</th>
+            </tr>
+            <?php foreach ($baskets as $basket): ?>
+            <tr class="tr_admin">
+                <?  $stmt = $conn->prepare("SELECT title FROM cactus WHERE id_cactus=:id_cactus");
+                    $stmt->bindParam(':id_cactus', $basket['id_cactus']);
+                    $stmt->execute();
+                    $result = $stmt->fetchColumn();?>
+                <td class='td_admin'><?php echo $basket['id_basket']; ?></td>
+                <td class='td_admin'><?php echo $basket['id_user']; ?></td>
+                <td class='td_admin'><?php echo $result; ?></td>
+                <td class='td_admin'><?php echo $basket['number']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php
     }elseif($id_page==6){
-        echo"11";
+        include "layouts/bd.php";
+        $stmt = $conn->prepare("SELECT * FROM user");
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        ?>
+        <table class="admin_table">
+            <tr>
+                <th class="admin_th">id Пользователя</th>
+                <th class="admin_th">Имя</th>
+                <th class="admin_th">Email</th>
+                <th class="admin_th">Пароль</th>
+            </tr>
+            <?php foreach ($users as $user): ?>
+            <tr class="tr_admin">
+                <td class='td_admin'><?php echo $user['id_user']; ?></td>
+                <td class='td_admin'><?php echo $user['name']; ?></td>
+                <td class='td_admin'><?php echo $user['email']; ?></td>
+                <td class='td_admin'><?php echo $user['password']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php
     }elseif($id_page==7){
-        echo"11";
-    }elseif($id_page==8){
-        echo"11";
-    }elseif($id_page==9){
-        echo"11";
+        include "layouts/bd.php";
+        $stmt = $conn->prepare("SELECT * FROM user");
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        foreach ($users as $user): ?>
+        <div>
+        <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus" enctype="multipart/form-data">
+            <input type="hidden"  name="id_user" value="<?= $user['id_user'] ?>">
+            <input type="hidden" name="id_page" value="<?=$id_page?>">
+            <div class="">
+            <p>ID пользователя</p>
+            <p><?= $user['id_user'] ?></p>
+            </div>
+            <div class="">
+            <p>Имя пользователя</p>
+            <input type="text" name="name" value="<?= $user['name'] ?>">
+            </div>
+            <div class="">
+            <p>Email пользователя</p>
+            <input type="text" name="email" value="<?= $user['email'] ?>">
+            </div>
+            <div class="">
+            <p>Пароль</p>
+            <input type="text" name="password" value="<?= $user['password'] ?>">
+            </div>
+        </div>
+        <button type="submit" name="submit_admin" value="update_user">Обновить данные</button>
+        <button type="submit" name="submit_admin" value="delete_user">Удалить пользователя</button>
+        </form>
+        <?php endforeach;
+    }elseif($id_page==8){ 
+        ?>
+        <div class='wrapp_create'>
+            <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus_form" enctype="multipart/form-data">
+                <input type="hidden" name="id_page" value="<?=$id_page?>">
+                <div class="change_cactus">
+                <input type="hidden" name="id_page">
+                <div class="">
+                    <p>Имя пользователя</p>
+                    <input type="text" name="name">
+                </div>
+                <div class="">
+                    <p>Email пользователя</p>
+                    <input type="text" name="email">
+                </div>
+                <div class="">
+                    <p>Пароль</p>
+                    <input type="text" name="password">
+                </div>
+                </div>
+                <button type="submit" class="sub_create" name="submit_admin" value="create_user">Создать пользователя</button>
+            </form>
+        </div><?
     }
     $conn = null;
     ?>

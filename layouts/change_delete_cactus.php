@@ -62,6 +62,8 @@ if($_POST['submit_admin'] == 'update'){
     $stmt->bindParam(':cost', $cost);
     $stmt->bindParam(':photo', $photo_content, PDO::PARAM_LOB); // Указываем параметр PDO::PARAM_LOB для записи в формате longblob
     $stmt->execute();
+    header("Location: ../admin_panel.php?id=1");
+    die();
 }elseif($_POST['submit_admin'] == 'status'){
     include 'bd.php'; 
     $id_order=$_POST['id_order'];
@@ -69,9 +71,39 @@ if($_POST['submit_admin'] == 'update'){
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_order', $id_order);
     $stmt->execute();
+}elseif($_POST['submit_admin'] == 'update_user'){
+    include 'bd.php';
+    $id_user = $_POST['id_user'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $stmt = $conn->prepare("UPDATE user SET name = :name, email = :email, password = :password WHERE id_user = :id_user");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':id_user', $id_user);
+    $stmt->execute();
+}elseif($_POST['submit_admin'] == 'delete_user'){
+    include 'bd.php';
+    $id_user = $_POST['id_user'];
+    $stmt = $conn->prepare("DELETE FROM user WHERE id_user = :id_user");
+    $stmt->bindParam(':id_user', $id_user);
+    $stmt->execute();
+}elseif($_POST['submit_admin'] == 'create_user'){
+    include 'bd.php'; 
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $stmt = $conn->prepare("INSERT INTO user (name, email, password) VALUES (:name, :email, :password)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->execute();
     $conn = null;
-    header("Location: ../admin_panel.php?id=4");
-    exit();
+    header("Location: ../admin_panel.php?id=7");
+    die();
 }
+$id_page=$_POST['id_page'];
 $conn = null;
-header("Location: ../admin_panel.php?id=2");
+header("Location: ../admin_panel.php?id=" . $id_page);

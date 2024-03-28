@@ -410,11 +410,14 @@ form{
     padding: 10px;
     font-size: 25px;
 }
-
 .tr_admin{
     border-bottom: 3px #58b755b9 solid;
 }
 
 .status_form{
     all: unset;
+}
+
+.td_desc{
+    font-size: 18px;
 }
