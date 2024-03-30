@@ -71,7 +71,10 @@ include 'layouts/header.php';
             <p>Цена</p>
             <input type="text" name="cost" value="<?= $cactus['cost'] ?>">
             </div>
-            <input type="file" placeholder="Введите ваше название файла" class="file" name="photo" accept="image/png, image/jpeg">
+            <div class="">
+            <p>Фото:</p>
+            <input type="file" class="file" name="photo" accept="image/png, image/jpeg">
+            </div>
         </div>
         <button type="submit" name="submit_admin" value="update">Обновить данные</button>
         <button type="submit" name="submit_admin" value="delete">Удалить товар</button>
@@ -83,8 +86,6 @@ include 'layouts/header.php';
             <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus_form" enctype="multipart/form-data">
                 <input type="hidden" name="id_page" value="<?=$id_page?>">
                 <div class="change_cactus">
-                <input type="hidden"  name="id_cactus">
-                <input type="hidden" name="id_page">
                 <div class="">
                     <p>Фото</p>
                     <input type="file" placeholder="Введите ваше название файла" class="file" name="photo" accept="image/png, image/jpeg">
