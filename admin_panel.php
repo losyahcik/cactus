@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.ico">
-    <title>cereus</title>
+    <title>cereusAdmin</title>
 </head>
 <body>
 <?php
@@ -76,8 +76,12 @@ include 'layouts/header.php';
             <input type="file" class="file" name="photo" accept="image/png, image/jpeg">
             </div>
         </div>
-        <button type="submit" name="submit_admin" value="update">Обновить данные</button>
-        <button type="submit" name="submit_admin" value="delete">Удалить товар</button>
+        <div class='submit_buttons'>
+        <div class="sb">
+        <button type="submit" class='submit_admin' name="submit_admin" value="update">Обновить данные</button>
+        <button type="submit" class='submit_admin' name="submit_admin" value="delete">Удалить товар</button>
+        </div>
+        </div>
         </form>
         <?php endforeach;
     }elseif($id_page==3){  
@@ -85,7 +89,7 @@ include 'layouts/header.php';
         <div class='wrapp_create'>
             <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus_form" enctype="multipart/form-data">
                 <input type="hidden" name="id_page" value="<?=$id_page?>">
-                <div class="change_cactus">
+                <div class="change_cactus cange">
                 <div class="">
                     <p>Фото</p>
                     <input type="file" placeholder="Введите ваше название файла" class="file" name="photo" accept="image/png, image/jpeg">
@@ -103,7 +107,9 @@ include 'layouts/header.php';
                     <input type="text" name="cost">
                 </div>
                 </div>
-                <button type="submit" class="sub_create" name="submit_admin" value="create">Создать товар</button>
+                <div class='submit_buttons'>
+                <button type="submit" class="submit_admin" name="submit_admin" value="create">Создать товар</button>
+                </div>
             </form>
         </div><?
     }elseif($id_page==4){
@@ -136,7 +142,7 @@ include 'layouts/header.php';
                         <form action="layouts/change_delete_cactus.php" method="post" class="status_form">
                             <input type="hidden" name="id_page" value="<?=$id_page?>">
                             <input type="hidden" name='id_order' value='<?=$order['id_order'];?>'>
-                            <button type="submit" class="" name="submit_admin" value="status">Принять в работу</button>
+                            <button type="submit" class="submit_admin" name="submit_admin" value="status">Принять в работу</button>
                         </form><?
                     }elseif($order['status']==1){
                         echo"Заказ в работе";
@@ -224,8 +230,12 @@ include 'layouts/header.php';
             <input type="text" name="password" value="<?= $user['password'] ?>">
             </div>
         </div>
-        <button type="submit" name="submit_admin" value="update_user">Обновить данные</button>
-        <button type="submit" name="submit_admin" value="delete_user">Удалить пользователя</button>
+        <div class='submit_buttons'>
+        <div class="sb sb2">
+        <button type="submit" class='submit_admin' name="submit_admin" value="update_user">Обновить данные</button>
+        <button type="submit" class='submit_admin' name="submit_admin" value="delete_user">Удалить пользователя</button>
+        </div>
+        </div>
         </form>
         <?php endforeach;
     }elseif($id_page==8){ 
@@ -233,7 +243,7 @@ include 'layouts/header.php';
         <div class='wrapp_create'>
             <form action="layouts/change_delete_cactus.php" method="post" class="change_cactus_form" enctype="multipart/form-data">
                 <input type="hidden" name="id_page" value="<?=$id_page?>">
-                <div class="change_cactus">
+                <div class="change_cactus cange">
                 <input type="hidden" name="id_page">
                 <div class="">
                     <p>Имя пользователя</p>
@@ -248,7 +258,7 @@ include 'layouts/header.php';
                     <input type="text" name="password">
                 </div>
                 </div>
-                <button type="submit" class="sub_create" name="submit_admin" value="create_user">Создать пользователя</button>
+                <button type="submit" class="submit_admin" name="submit_admin" value="create_user">Создать пользователя</button>
             </form>
         </div><?
     }

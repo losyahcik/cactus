@@ -181,7 +181,7 @@ form{
     transition: all .2s ease-out;
 }
 
-.cactus_wrapp:hover, .buy_but:hover{
+.cactus_wrapp:hover, .buy_but:hover, .submit_admin:hover{
     cursor: pointer;
     opacity: 80%;
 }
@@ -420,4 +420,38 @@ form{
 
 .td_desc{
     font-size: 18px;
+}
+
+.submit_admin{
+    all: unset;
+    color: #59B755;
+    background-color: #fff;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px #58b755b9 solid;
+    
+}
+
+.submit_buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sb{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sb2{
+    width: 25%;
+}
+
+.cange{
+    background-color: #ffffff00;
 }
