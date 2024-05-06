@@ -54,8 +54,20 @@ header{
     align-items: center;
 }
 
+.user_hrefs{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .basket_svg{
     fill: #59B755;
+}
+
+.img_prof{
+    width:  60px;
+    height: 60px;
 }
 
 .footer{
@@ -89,7 +101,6 @@ header{
     align-items: baseline;
     justify-content: flex-start;
     padding-left: 40px;
-
 }
 
 .user_info{
@@ -181,7 +192,7 @@ form{
     transition: all .2s ease-out;
 }
 
-.cactus_wrapp:hover, .buy_but:hover, .submit_admin:hover{
+.cactus_wrapp:hover,.has_basket_a:hover, .buy_but:hover, .submit_admin:hover{
     cursor: pointer;
     opacity: 80%;
 }
@@ -259,7 +270,8 @@ form{
 
 .cactus_wrapp_user{
     flex-direction: row;
-    width: 100%;
+    max-width: 100%;
+    margin-left: 30px;
 }
 
 .desc{
@@ -318,6 +330,11 @@ form{
    min-height: 81vh;
    max-height: fit-content;
    margin-bottom: 20px;
+}
+
+.wrapp_user_bus{
+    align-items: baseline;
+    justify-content: flex-start;
 }
 
 .error{
@@ -454,4 +471,22 @@ form{
 
 .cange{
     background-color: #ffffff00;
+}
+
+.has_basket{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.has_basket2{
+    margin-top: 19%;
+}
+
+.has_basket_a{
+    font-weight:300;
 }

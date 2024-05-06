@@ -23,6 +23,7 @@
             <input class="form_input" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="минимум 8 символов, 4 цифры и 4 буквы" type="password" name="password" placeholder="Пароль" required>    
             <button type="submit" class="submit form_input" name="register" value="Авторизоваться">Авторизоваться</button>
             </form>
+            <p class='error'><? session_start();if(isset($_SESSION['error'])){print_r($_SESSION['error']);unset( $_SESSION['error']); }?></p>
             <a href="regstration.php">Нет профиля? Зарегистрироваться</a>
         </div>
     </main>

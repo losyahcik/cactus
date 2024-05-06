@@ -48,11 +48,10 @@ function basket_update(){
         $stmt_basket = $conn->prepare($query_basket);
         $stmt_basket->bindParam(':user_id', $user_id);
         $stmt_basket->execute();
+        if ($stmt_basket->rowCount() > 0) {
 
         while ($row_basket = $stmt_basket->fetch(PDO::FETCH_ASSOC)) {
             $id_cactus = $row_basket['id_cactus'];
-            
-            // $number = $row_basket['number'];
 
             $query_product = "SELECT * FROM cactus WHERE id_cactus = :id_cactus";
             $stmt_product = $conn->prepare($query_product);
@@ -74,6 +73,12 @@ function basket_update(){
     echo '</form>';          
     echo '</div>';
     echo '</div>';
+}
+session_start();
+unset( $_SESSION['has_basket']);
+}else{
+    session_start();
+    $_SESSION['has_basket']=0;
 }
 }
 }

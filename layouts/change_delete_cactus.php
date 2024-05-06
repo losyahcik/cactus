@@ -77,10 +77,11 @@ if($_POST['submit_admin'] == 'update'){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $conn->prepare("UPDATE user SET name = :name, email = :email, password = :password WHERE id_user = :id_user");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':password', $hashed_password);
     $stmt->bindParam(':id_user', $id_user);
     $stmt->execute();
 }elseif($_POST['submit_admin'] == 'delete_user'){
@@ -94,11 +95,12 @@ if($_POST['submit_admin'] == 'update'){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
     $stmt = $conn->prepare("INSERT INTO user (name, email, password) VALUES (:name, :email, :password)");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':password', $hashed_password);
     $stmt->execute();
     $conn = null;
     header("Location: ../admin_panel.php?id=7");

@@ -11,22 +11,24 @@ try {
             exit;
         }
         
-        $stmt = $conn->prepare('SELECT name FROM user WHERE password = :password AND email = :email');
-        
-        $stmt->bindParam(':password', $password);
+        $stmt = $conn->prepare('SELECT name,password FROM user WHERE email = :email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $row = $stmt->fetch();
 
-        if ($result) {
-            $name = $result['name'];
+        if ($row) {
+            if(password_verify($password, $row['password'])) {
+            $name = $row['name'];
             session_start();
+            $_SESSION['password']=$password;
             $_SESSION['user_email']=$email;
             $_SESSION['user_name'] = $name;
+            }
         } else {
-            $name="Пользователя с такими данными не сущутсвует, повторите попытку";
-            $email="";
-            $password="";
+            session_start();
+            $_SESSION['error']='Пользователя с такими данными не существует';
+            header('Location: avtoristion.php');
+            die();
         }
     }
 } catch(PDOException $e) {

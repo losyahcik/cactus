@@ -60,6 +60,7 @@ function order_user(){
         $stmt_basket = $conn->prepare($query_basket);
         $stmt_basket->bindParam(':user_id', $user_id);
         $stmt_basket->execute();
+        if ($stmt_basket->rowCount() > 0) {
 
         while ($row_basket = $stmt_basket->fetch(PDO::FETCH_ASSOC)) {
             $id_cactus = $row_basket['id_cactus'];
@@ -93,6 +94,11 @@ function order_user(){
     echo '</form>';          
     echo '</div>';
     echo '</div>';
+}session_start();
+unset( $_SESSION['has_basket']);
+}else{
+    session_start();
+    $_SESSION['has_basket']=0;
 }
 }
 }

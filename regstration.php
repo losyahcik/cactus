@@ -24,8 +24,9 @@
             <input class="form_input" type="password" id="pass1" name="password" placeholder="Пароль" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="минимум 8 символов, 4 цифры и 4 буквы">
             <input class="form_input" type="password" id="pass2" placeholder="Повторите пароль" required>
             <p class="error">Пароли не совпадают</p>
-            <button type="submit" id="submitButton" class="submit form_input" name="register" value="Зарегестрироваться">Зарегестрироваться</button>
+            <button type="submit" id="submitButton" class="submit form_input" name="register" value="Зарегистрироваться">Зарегистрироваться</button>
             </form>
+            <p class='error'><? session_start();if(isset($_SESSION['error'])){print_r($_SESSION['error']);unset( $_SESSION['error']); }?></p>
             <a href="avtoristion.php">Есть профиль? Авторизоваться</a>
         </div>
     </main>
