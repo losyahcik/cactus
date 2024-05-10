@@ -15,7 +15,7 @@ try {
         if ($result) {
             // Если пользователь с таким email уже существует, выведите сообщение об ошибке
              session_start();
-             $_SESSION['error']='Пользователя с таким Email уже существует';
+             $_SESSION['error']='Пользователь с таким Email уже существует';
              header("Location: regstration.php");
              die();
         } else {

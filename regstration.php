@@ -26,7 +26,7 @@
             <p class="error">Пароли не совпадают</p>
             <button type="submit" id="submitButton" class="submit form_input" name="register" value="Зарегистрироваться">Зарегистрироваться</button>
             </form>
-            <p class='error'><? session_start();if(isset($_SESSION['error'])){print_r($_SESSION['error']);unset( $_SESSION['error']); }?></p>
+            <p class='error error2'><? session_start();if(isset($_SESSION['error'])){print_r($_SESSION['error']);unset( $_SESSION['error']); }?></p>
             <a href="avtoristion.php">Есть профиль? Авторизоваться</a>
         </div>
     </main>
@@ -39,6 +39,7 @@
         const passwordField2 = document.querySelector('#pass2');
         const submitButton = document.querySelector('#submitButton');
         const error = document.querySelector('.error');
+        error.style.display = 'none';
 
         function checkPasswords() {
         const password1 = passwordField1.value;

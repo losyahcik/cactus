@@ -13,7 +13,7 @@ include 'layouts/header.php';
 ?>
 <div class="wrapp_bus">
 <div class="wrapp_user_bus">
-    <?php
+    <?
     include "layouts/busket_user.php";
     ?>  
 </div>

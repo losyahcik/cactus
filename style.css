@@ -346,6 +346,11 @@ form{
     color: red;
 }
 
+.error2{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .admin{
     color: #59B755;
     padding: 37px 80px 37px 80px;
@@ -507,7 +512,7 @@ form{
     font-size: 20px;
 }
 
-.input_search, .submit_search{
+.input_search, .submit_search,.button_rating{
     all: unset;
     height: 100%;
 }
@@ -529,4 +534,43 @@ form{
 .search_but:hover{
    opacity: 60%;
    cursor: pointer;
+}
+
+.rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.star {
+    fill: transparent;
+    stroke:#58b755;
+    stroke-width: 2;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.star_unuser{
+    fill: transparent;
+    stroke:#58b755;
+    stroke-width: 2;
+    width: 30px;
+    height: 30px;   
+    margin-left: 5px;
+}
+
+.star:hover, .star.filled, .fill {
+    fill: #58b755;
+}
+
+.form_action{
+    padding: 10px;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+}
+
+.form_action:first-child{
+    padding-left:0;
 }
