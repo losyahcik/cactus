@@ -131,4 +131,4 @@ function avgRate() {
     }
                      
 }
-$conn=null ?>
+$conn=null;
