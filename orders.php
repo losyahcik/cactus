@@ -14,7 +14,7 @@
     ?>
     </header>
     <main>
-        <div class="wrapp wrapp_user">
+        <div class="wrapp wrapp_orders">
                 <?php include 'layouts/orders_user.php';?>
                 <?if(isset($_SESSION['has_basket'])){?>
             <div class="cost_bus has_basket has_basket2">

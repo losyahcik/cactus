@@ -59,19 +59,19 @@ function basket_update(){
             $stmt_product->execute();
             $row_product = $stmt_product->fetch(PDO::FETCH_ASSOC);
     // Формирование информации о товаре
-    echo '<div class="cactus_wrapp_user" />';
-    echo '<div class="cactus_wrapp_img" />';
+    echo '<div class="cactus_wrapp  cactus_wrapp_user" />';
+    echo '<div class="cactus_image_basket" />';
     echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($row_product['photo']) . '" />';
     echo '</div>';
     echo '<div class="desc">';
     echo '<p class="cactus_p cactus_title">' . $row_product['title'] . '</p>';
     echo '<p class="cactus_p cactus_cost">' . $row_product['cost'] .'₽'. '</p>';
-    echo '<p class="cactus_p cactus_cost">' . $row_basket['number'] .'шт.'. '</p>';
-    echo '<form method="POST" action="" class="basket_form busket_bus">';
-    echo '<button type="submit" onclick="reloadPage()"class="buy_but but_bus" name="buttonn">Удалить</button>';
+    echo '<p class="cactus_p cactus_cost">' . $row_basket['number'] .'шт.'. '</p>';     
+    echo '</div>';   
+    echo '<form method="POST" action="" class="basket_form no_order_form ">';
+    echo '<button type="submit" class="no_order" name="buttonn">Удалить</button>';
     echo '<input type="hidden" name="form_id" value='.$row_basket['id_basket'].'>';              
-    echo '</form>';          
-    echo '</div>';
+    echo '</form>';  
     echo '</div>';
 }
 session_start();

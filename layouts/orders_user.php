@@ -81,8 +81,8 @@ function order_user(){
             $row_product = $stmt_product->fetch(PDO::FETCH_ASSOC);
     
     // Формирование информации о товаре
-    echo '<div class="cactus_wrapp_user" />';
-    echo '<div class="cactus_wrapp_img" />';
+    echo '<div class="cactus_wrapp cactus_wrapp_orders" />';
+    echo '<div class="cactus_image_basket" />';
     echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($row_product['photo']) . '" />';
     echo '</div>';
     echo '<div class="desc">';

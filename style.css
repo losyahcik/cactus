@@ -107,6 +107,20 @@ header{
     padding-left: 40px;
 }
 
+.wrapp_orders{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 80px;
+    padding-left: 80px;
+}
+
+.cactus_wrapp_orders{
+    margin-top: 40px;
+}
+
 .user_info{
     font-family: "Roboto", sans-serif;
     color: #59B755;
@@ -177,7 +191,7 @@ form{
 
 .wrapp_index{
     padding-left: 75px;
-    padding-right: 100px;
+    padding-right: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -284,27 +298,49 @@ form{
 }
 
 .cactus_wrapp_user{
-    flex-direction: row;
+    flex-direction: column;
     max-width: 100%;
-    margin-left: 30px;
+    margin-left: 50px;
+    background-color: #fff;
+}
+
+
+.cactus_image_basket{
+    margin-left: 40px;
+}
+
+.no_order_form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.no_order{
+    all: unset;
+    color: #fff;
+    background-color: #58b755;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 15px;
+    font-size: 25px;
+    text-align: center;
+
 }
 
 .desc{
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
+    margin-left: 40px;
 
-}
-
-.cactus_wrapp_user img{
-    width: 350px;
-    height: 100%;   
 }
 
 .cactus_wrapp_user{
     color: #59B755;
     display: flex;
     margin-top: 60px;
+    width: 350px;
+    margin-left: 100px;
 }
 
 .but_bus{
@@ -369,8 +405,9 @@ form{
 }
 
 .wrapp_user_bus{
-    align-items: baseline;
-    justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
 }
 
 .error{
@@ -530,6 +567,38 @@ form{
 
 .has_basket_a{
     font-weight:300;
+}
+
+.wrapp_search{
+    width: 100%;
+    color: #58b755;
+    flex-direction: column;
+    justify-content: normal;
+}
+
+.none_search{
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    margin-top: 17%;
+    
+}
+
+.cactus_wrapp_search{
+    max-width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-right: 20px;
+}
+
+.cactus_desc{
+    max-width: 400px;
+}
+
+.cactus_title_search{
+    width: 100px;
 }
 
 .form_search{

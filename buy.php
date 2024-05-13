@@ -57,14 +57,16 @@
                 <?}else{?>
                         <div class="form_action"><?
                         avgRate();?>
-                        </div><span class="p_description">(Ваша оценка:<?
-                        $stmt = $conn->prepare("SELECT * FROM rating WHERE id_user = :id_user AND id_cactus = :id_cactus");
+                        </div><span class="p_description"><?
+                        $stmt = $conn->prepare("SELECT rating FROM rating WHERE id_user = :id_user AND id_cactus = :id_cactus");
                         $stmt->bindParam(':id_user', $userId);
                         $stmt->bindParam(':id_cactus', $orderId);
                         $stmt->execute();
                         $user_rate = $stmt->fetch(PDO::FETCH_ASSOC);
-                        echo $user_rate['rating'];
-                        ?>)</span><?
+                        if($user_rate){
+                            echo "(Ваша оценка:".$user_rate['rating'].")";
+                        }
+                        ?></span><?
                 }; }else{
                     ?>
                         <div class="form_action"><?
