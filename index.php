@@ -25,6 +25,7 @@
     <?php
     include 'layouts/footer.php';
     ?>
+<script src="script.js"></script>
 <script>
 function redirectToBuyPage(blockId) {
   window.location = "buy.php?id=" + blockId;
@@ -32,3 +33,4 @@ function redirectToBuyPage(blockId) {
 </script>
 </body>
 </html>
+<?$conn=null?>

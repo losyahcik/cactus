@@ -29,7 +29,7 @@ include 'layouts/header.php';
         </div>
         <div class="admin_menu_wrapp">
             <p class="title_admin">Управление заказами</p>
-            <p class="admin_select" onclick=redirectToAdmin(4)>Просмотреть заказы/Удалить заказы/Изменить статус заказа</p>
+            <p class="admin_select" onclick=redirectToAdmin(4)>Просмотреть заказы/Изменить статус заказа</p>
         </div>
         <div class="admin_menu_wrapp">
             <p class="title_admin">Управление корзинами</p>

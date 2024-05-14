@@ -37,17 +37,17 @@ include 'layouts/header.php';
                 <th class="admin_th">цена</th>
                 <th class="admin_th">Фото</th>
             </tr>
-            <?php foreach ($cactus as $cactus): ?>
+            <? foreach ($cactus as $cacti): ?>
             <tr class="tr_admin">
-                <td class='td_admin'><? echo $cactus['id_cactus']; ?></td>
-                <td class='td_admin'><? echo $cactus['title']; ?></td>
-                <td class='td_desc td_admin'><? echo $cactus['description']; ?></td>
-                <td class='td_admin '><? echo $cactus['cost']; ?></td>
-                <td class='td_admin'><?echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($cactus['photo']) . '" />';?></td>
+                <td class='td_admin'><? echo $cacti['id_cactus']; ?></td>
+                <td class='td_admin'><? echo $cacti['title']; ?></td>
+                <td class='td_desc td_admin'><? echo $cacti['description']; ?></td>
+                <td class='td_admin '><? echo $cacti['cost']; ?></td>
+                <td class='td_admin'><?echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($cacti['photo']) . '" />';?></td>
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php
+        <?
     }elseif($id_page==2){
         include "layouts/bd.php";
         $stmt = $conn->prepare("SELECT * FROM cactus");
@@ -83,7 +83,7 @@ include 'layouts/header.php';
         </div>
         </div>
         </form>
-        <?php endforeach;
+        <? endforeach;
     }elseif($id_page==3){  
         ?>
         <div class='wrapp_create'>
@@ -127,7 +127,7 @@ include 'layouts/header.php';
                 <th class="admin_th">Статус</th>
                 <th class="admin_th">Время заказа</th>
             </tr>
-            <?php foreach ($orders as $order): ?>
+            <? foreach ($orders as $order): ?>
             <tr class="tr_admin">
                 <?  $stmt = $conn->prepare("SELECT title FROM cactus WHERE id_cactus=:id_cactus");
                     $stmt->bindParam(':id_cactus', $order['id_cactus']);
@@ -148,11 +148,11 @@ include 'layouts/header.php';
                         echo"Заказ в работе";
                     }
                 ?></td>
-                <td class='td_admin'><?php echo $order['time']; ?></td>
+                <td class='td_admin'><? echo $order['time']; ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php
+        <?
     }elseif($id_page==5){
         include "layouts/bd.php";
         $stmt = $conn->prepare("SELECT * FROM basket");
@@ -179,7 +179,7 @@ include 'layouts/header.php';
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php
+        <?
     }elseif($id_page==6){
         include "layouts/bd.php";
         $stmt = $conn->prepare("SELECT * FROM user");
@@ -202,7 +202,7 @@ include 'layouts/header.php';
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php
+        <?
     }elseif($id_page==7){
         include "layouts/bd.php";
         $stmt = $conn->prepare("SELECT * FROM user");
@@ -237,7 +237,7 @@ include 'layouts/header.php';
         </div>
         </div>
         </form>
-        <?php endforeach;
+        <? endforeach;
     }elseif($id_page==8){ 
         ?>
         <div class='wrapp_create'>

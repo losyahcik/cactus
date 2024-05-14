@@ -7,7 +7,17 @@
     <link rel="shortcut icon" href="favicon.ico">
     <title>cereus</title>
 </head>
-<body>
+<body class="buy_body">
+    <div id="dialog" id='dialog'class="dialog">
+        <div class="dialog_wrapp">
+            <p class="p_dialog">Хотите оставить отзыв?</p>
+            <textarea class="text_dialog" placeholder="Мой отзыв..."></textarea>
+            <div class="dialog_buttons">
+                <button id="button_dialog_no" class="button_dialog button_dialog_no">Нет</button>
+                <button id="button_dialog_yes" class="button_dialog button_dialog_yes">Оставить отзыв</button>
+            </div>
+        </div>
+    </div>
     <header>
     <?
     include 'layouts/header.php';
@@ -42,17 +52,17 @@
                         $stmt->bindParam(':cactusId', $orderId);
                         $stmt->execute();
                         $order = $stmt->fetch(PDO::FETCH_ASSOC);
-
                         $stmt = $conn->prepare("SELECT * FROM rating WHERE id_user = :id_user AND id_cactus = :id_cactus");
                         $stmt->bindParam(':id_user', $userId);
                         $stmt->bindParam(':id_cactus', $orderId);
                         $stmt->execute();
                         $user_rate = $stmt->fetch(PDO::FETCH_ASSOC);
-                        if ($order && !$user_rate){?><form class="form_action" method="post" action="layouts/rating.php"><input type="hidden" name='id_cactus' value="<?echo $_GET['id'] ?>"><input type="hidden" value="1" name="rating"><button name='button_rating' class="button_rating"><svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button></form>
-                        <form class="form_action" method="post" action="layouts/rating.php"><input type="hidden" name='id_cactus' value="<?echo $_GET['id'] ?>"><input type="hidden" value="2" name="rating"><button name='button_rating' class="button_rating"><svg class="star" data-value="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button></form>
-                        <form class="form_action" method="post" action="layouts/rating.php"><input type="hidden" name='id_cactus' value="<?echo $_GET['id'] ?>"><input type="hidden" value="3" name="rating"><button name='button_rating' class="button_rating"><svg class="star" data-value="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button></form>
-                        <form class="form_action" method="post" action="layouts/rating.php"><input type="hidden" name='id_cactus' value="<?echo $_GET['id'] ?>"><input type="hidden" value="4" name="rating"><button name='button_rating' class="button_rating"><svg class="star" data-value="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button></form>
-                        <form class="form_action" method="post" action="layouts/rating.php"><input type="hidden" name='id_cactus' value="<?echo $_GET['id'] ?>"><input type="hidden" value="5" name="rating"><button name='button_rating' class="button_rating"><svg class="star" data-value="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button></form>    
+                        if ($order && !$user_rate){?>
+                        <div class="form_action"><svg class="star star_has" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        <div class="form_action"><svg class="star star_has" data-value="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        <div class="form_action"><svg class="star star_has" data-value="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        <div class="form_action"><svg class="star star_has" data-value="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        <div class="form_action"><svg class="star star_has" data-value="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
                         <span class="p_description">(Оцените товар)</span>
                 <?}else{?>
                         <div class="form_action"><?
@@ -69,9 +79,8 @@
                         ?></span><?
                 }; }else{
                     ?>
-                        <div class="form_action"><?
+                    <div class="form_action"><?
                     avgRate();?></div><?
-                     
                 }?>
                 </div>
                 <p class="p_description"><? print_r($description)?></p>
@@ -84,19 +93,41 @@
     include 'layouts/footer.php';
     ?>
     </footer>
-    <script>document.addEventListener('DOMContentLoaded', function() {
-    const stars = document.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-        star.addEventListener('mouseover', function() {
-            stars.forEach((s, i) => {
-                if (i <= index) {
-                    s.classList.add('filled');
-                } else {
-                    s.classList.remove('filled');
-                }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star_has');
+        const dialogElement = document.getElementById('dialog');
+        const textDialogElement = dialogElement.querySelector('.text_dialog');
+        const buttonNoElement = document.getElementById('button_dialog_no');
+        const buttonYesElement = document.getElementById('button_dialog_yes');
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id');
+        let starRating = 0;
+        let userInputText = '';
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                starRating = star.getAttribute('data-value');
+                dialogElement.style.display = 'flex';
+            });
+            star.addEventListener('mouseover', function() {
+                stars.forEach((s, i) => {
+                    if (i <= Array.from(stars).indexOf(star)) {
+                        s.classList.add('filled');
+                    } else {
+                        s.classList.remove('filled');
+                    }
+                });
             });
         });
-    });
+        buttonNoElement.addEventListener('click', function() {
+            userInputText = textDialogElement.value;
+            window.location.href = `layouts/rating.php?id=${id}&star=${starRating}&text=${userInputText}`;
+        });
+        buttonYesElement.addEventListener('click', function() {
+            userInputText = textDialogElement.value;
+            window.location.href = `layouts/rating.php?id=${id}&star=${starRating}&text=${userInputText}`;
+        });
 });</script>
 </body>
 </html>
@@ -104,7 +135,6 @@
 function avgRate() {
     include 'layouts/bd.php';
     $id_cactus = $_GET['id'];
-
     // Подготавливаем запрос для получения рейтинга по id_cactus
     $stmt = $conn->prepare("SELECT rating FROM rating WHERE id_cactus = :id_cactus");
     $stmt->bindParam(':id_cactus', $id_cactus);
@@ -121,7 +151,7 @@ function avgRate() {
     }
     
     // Вычисляем средний рейтинг
-    $averageRating = $ratingCount > 0 ? $totalRating / $ratingCount : 0;
+    $averageRating = $ratingCount > 0 ? round($totalRating / $ratingCount) : 0;
     for ($i = 1; $i <= 5; $i++) {
         // Генерируем SVG-элемент
         $svg = '<svg class="star_unuser';
