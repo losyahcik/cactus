@@ -22,6 +22,7 @@ body{
     position: absolute;
     width: 100%;
     height: 100%;
+    max-height: 100vh;
     background-color: #2a6338d3;
     font-family: "Roboto", sans-serif;
     align-items: center;  
@@ -76,6 +77,11 @@ body{
     outline: none;
     transition: all .2s ease;
     border: #ccc 2px solid;
+}
+
+.text_dialog_admin{
+    width: 400px;
+    height: 100px;
 }
 
 .text_dialog:focus{
@@ -133,6 +139,10 @@ header{
     align-items: center;
 }
 
+.user{
+    margin-top: 20px;
+}
+
 .basket_svg{
     fill: #59B755;
     width: 60px;
@@ -174,7 +184,8 @@ header{
 .wrapp_user{
     align-items: baseline;
     justify-content: flex-start;
-    padding-left: 40px;
+    padding-left: 50px;
+    padding-top: 20px;
 }
 
 .wrapp_orders{
@@ -198,9 +209,12 @@ header{
     font-size: 35px;
 }
 
+.user_basket{
+    margin-top: 20px;
+}
+
 .user_basket a{
     margin-right: 20px;
-
 }
 
 .wrapp a{
@@ -307,11 +321,16 @@ form{
     justify-content: space-between;
 }
 
+.buy_wrapp_main{
+    min-height: 81vh;
+    max-height: fit-content;
+}
+
+
 .buy_wrapp{
     display: flex;
     padding-left: 40px;
     padding-right: 190px;
-    min-height: 81vh;
     color: #59B755;
     justify-content: space-between;
 }
@@ -323,8 +342,9 @@ form{
 }
 
 .buy_photo img{
+    object-fit: cover;
     width: 400px;
-    height: 600px;
+    height: 500px;
     border: 3px #59B755 solid;
     border-radius: 15px;
 }
@@ -374,6 +394,18 @@ form{
     background-color: #fff;
 }
 
+.user_rating_buy{
+    font-size: 25px;
+}
+
+.reviews_h2{
+    color: #58b755;
+    font-size: 30px;
+}
+
+.cactus_review:last-child{
+    margin-bottom: 30px;
+}
 
 .cactus_image_basket{
     margin-left: 40px;
@@ -411,6 +443,17 @@ form{
     margin-top: 60px;
     width: 350px;
     margin-left: 100px;
+}
+
+.reviews{
+    margin-top: 50px;
+    padding-right: 700px;
+    padding-left: 100px;
+}
+
+.revie_text{
+    max-width: 300px;
+    text-align: center;
 }
 
 .but_bus{
@@ -491,6 +534,8 @@ form{
 }
 
 .admin{
+    min-height: 81vh;
+    max-height: fit-content;
     color: #59B755;
     padding: 37px 80px 37px 80px;
 }
@@ -557,6 +602,7 @@ form{
 }
 
 .admin_table{
+    margin-top: 20px;
     width: 100%;
     border-collapse: collapse;
 }
@@ -629,10 +675,6 @@ form{
     justify-content: center;
     margin: 0;
     padding: 0;
-}
-
-.has_basket2{
-    margin-top: 19%;
 }
 
 .has_basket_a{

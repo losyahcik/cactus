@@ -24,6 +24,7 @@ include 'layouts/header.php';
         <div class="admin_menu_wrapp">
             <p class="title_admin">Управление товарами</p>
             <p class="admin_select" onclick=redirectToAdmin(1)>Просмотреть товары</p>
+            <p class="admin_select" onclick=redirectToAdmin(9)>Отзывы на товары</p>
             <p class="admin_select" onclick=redirectToAdmin(2)>Редактировать/Удалить товары</p>
             <p class="admin_select" onclick=redirectToAdmin(3)>Добавить товары</p>
         </div>

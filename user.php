@@ -16,13 +16,13 @@ include 'layouts/user_info.php';
 <div class="wrapp wrapp_user">
     <div class="user_info">
         <p class="user">
-            <?php print_r($name)?>
+            Имя:<? print_r(' '.$name)?>
         </p>
         <p class="user">
-            <?php print_r($email)?>
+            Email:<? print_r(' '.$email)?>
         </p>
         <p class="user">
-            <?php print_r($password)?>
+            Пароль:<?print_r(' '.$password)?>
         </p>
         <div class="user_basket">
             <a href="busket.php">Корзина</a>

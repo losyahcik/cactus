@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin'])){
     <title>cereusAdmin</title>
 </head>
 <body>
-<?php
+<?
 include 'layouts/header.php';
 ?>
 <div class="admin">
@@ -25,7 +25,7 @@ include 'layouts/header.php';
     <?
     if($id_page==1){
         include "layouts/bd.php";
-        $stmt = $conn->prepare("SELECT * FROM cactus");
+        $stmt = $conn->prepare("SELECT cactus.*, ROUND((SELECT AVG(rating) FROM rating WHERE id_cactus = cactus.id_cactus)) as average_rating FROM cactus");
         $stmt->execute();
         $cactus = $stmt->fetchAll();
         ?>
@@ -33,6 +33,7 @@ include 'layouts/header.php';
             <tr>
                 <th class="admin_th">id товара</th>
                 <th class="admin_th">Название</th>
+                <th class="admin_th">рейтинг</th>
                 <th class="admin_th">Описание</th>
                 <th class="admin_th">цена</th>
                 <th class="admin_th">Фото</th>
@@ -41,6 +42,7 @@ include 'layouts/header.php';
             <tr class="tr_admin">
                 <td class='td_admin'><? echo $cacti['id_cactus']; ?></td>
                 <td class='td_admin'><? echo $cacti['title']; ?></td>
+                <td class='td_admin'><? echo $cacti['average_rating']; ?></td>
                 <td class='td_desc td_admin'><? echo $cacti['description']; ?></td>
                 <td class='td_admin '><? echo $cacti['cost']; ?></td>
                 <td class='td_admin'><?echo '<img class="cactus_image" src="data:image/jpeg;base64,' . base64_encode($cacti['photo']) . '" />';?></td>
@@ -261,7 +263,44 @@ include 'layouts/header.php';
                 <button type="submit" class="submit_admin" name="submit_admin" value="create_user">Создать пользователя</button>
             </form>
         </div><?
-    }
+    }elseif($id_page==9){
+        include "layouts/bd.php";?>
+        <table class="admin_table">
+            <tr class="tr_admin">
+                <th class="admin_th">id товара</th>
+                <th class="admin_th">Название</th>
+                <th class="admin_th">id пользователя</th>
+                <th class="admin_th">Пользователь</th>
+                <th class="admin_th">Оценка</th>
+                <th class="admin_th">Отзыв</th>
+                <th class="admin_th">Одобрить отзыв</th>
+            </tr>
+            <?
+            $stmt = $conn->prepare("SELECT rating.*, cactus.title as title, user.name as user_name
+            FROM rating
+            LEFT JOIN cactus ON rating.id_cactus = cactus.id_cactus
+            LEFT JOIN user ON rating.id_user = user.id_user
+            WHERE rating.status IS NULL
+            AND (rating.description IS NOT NULL AND rating.description <> '')
+            ");
+            $stmt->execute();
+            $ratings = $stmt->fetchAll();
+            foreach($ratings as $rating): ?>
+        <tr class="tr_admin">
+            <td class='td_admin'><?= $rating['id_cactus']; ?></td>
+            <td class='td_admin'><?= $rating['title']; ?></td>
+            <td class='td_admin'><?= $rating['id_cactus']; ?></td>
+            <td class='td_admin'><?= $rating['user_name']; ?></td>
+            <td class='td_admin'><?= $rating['rating']; ?></td>
+            <form method='post'action="layouts/change_delete_cactus.php">
+            <input name="id_page" value="<?=$id_page?>" type="hidden">
+            <input name="id_rating" value="<?=$rating['id_rating']?>" type="hidden">
+            <td class='td_admin'><textarea class="text_dialog text_dialog_admin" name="rating_text"><?= $rating['description'];?></textarea></td>
+            <td class='td_admin'><button type="submit" class="submit_admin" name="submit_admin" value="rating_status">Одобрить отзыв</button></td></form>
+        </tr>
+    <? endforeach; ?>
+        </table>    
+    <?}
     $conn = null;
     ?>
 </div>

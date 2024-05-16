@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 14 2024 г., 15:46
+-- Время создания: Май 16 2024 г., 10:28
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -39,7 +39,6 @@ CREATE TABLE `basket` (
 --
 
 INSERT INTO `basket` (`id_basket`, `id_user`, `id_cactus`, `number`) VALUES
-(39, 20, 4, 1),
 (60, 34, 2, 2);
 
 -- --------------------------------------------------------
@@ -121,7 +120,13 @@ INSERT INTO `orders` (`id_order`, `id_user`, `id_cactus`, `number`, `status`, `t
 (31, 36, 3, 2, 1, '2024-05-14 13:40'),
 (32, 36, 12, 2, 1, '2024-05-14 13:40'),
 (33, 36, 1, 2, 1, '2024-05-14 15:15'),
-(34, 36, 2, 2, 1, '2024-05-14 15:24');
+(34, 36, 2, 2, 1, '2024-05-14 15:24'),
+(35, 36, 4, 1, 1, '2024-05-16 08:16'),
+(36, 20, 4, 1, 1, '2024-05-16 08:26'),
+(37, 20, 3, 1, 1, '2024-05-16 08:26'),
+(38, 20, 2, 1, 1, '2024-05-16 08:26'),
+(39, 20, 1, 1, 1, '2024-05-16 08:26'),
+(40, 20, 12, 1, 1, '2024-05-16 08:26');
 
 -- --------------------------------------------------------
 
@@ -156,10 +161,16 @@ INSERT INTO `rating` (`id_rating`, `id_user`, `id_cactus`, `description`, `ratin
 (25, 35, 3, NULL, 5, NULL),
 (26, 35, 4, NULL, 4, NULL),
 (27, 35, 12, NULL, 5, NULL),
-(28, 36, 12, 'd', 5, NULL),
-(29, 36, 3, 'Хороший кактус', 5, NULL),
-(30, 36, 1, 'хороший кактус', 5, NULL),
-(31, 36, 2, 'очень хороший кактус', 5, NULL);
+(28, 36, 12, 'Очень хороший магазин с быстрой доставкой.\r\nКактус отличный', 5, 1),
+(29, 36, 3, 'Хороший кактус', 5, 1),
+(30, 36, 1, 'хороший кактус', 5, 1),
+(31, 36, 2, 'очень хороший кактус', 5, 1),
+(32, 36, 4, '', 4, NULL),
+(33, 20, 1, 'Отличная цена, быстрая доставка', 5, 1),
+(34, 20, 2, 'Хорошая цена, быстрая доставка', 5, 1),
+(35, 20, 3, 'Хорошая цена быстрая доставка. Не прижился в моем доме', 3, 1),
+(36, 20, 4, 'Хорошая цена, быстрая доставка', 5, 1),
+(37, 20, 12, 'Хорошая цена, быстрая доставка', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -235,7 +246,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id_basket` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_basket` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT для таблицы `cactus`
@@ -247,13 +258,13 @@ ALTER TABLE `cactus`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id_order` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_order` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT для таблицы `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id_rating` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_rating` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT для таблицы `user`

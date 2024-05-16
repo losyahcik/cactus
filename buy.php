@@ -8,7 +8,7 @@
     <title>cereus</title>
 </head>
 <body class="buy_body">
-    <div id="dialog" id='dialog'class="dialog">
+    <div id="dialog" class="dialog">
         <div class="dialog_wrapp">
             <p class="p_dialog">Хотите оставить отзыв?</p>
             <textarea class="text_dialog" placeholder="Мой отзыв..."></textarea>
@@ -25,6 +25,7 @@
     ?>
     </header>
     <main>
+        <div class="buy_wrapp_main">
         <div class="buy_wrapp">
             <div class="buy_photo">
                 <img class="cactus_image_buy" src="data:image/jpeg;base64, <?php print_r($photo)?>"/>
@@ -87,6 +88,27 @@
                 <p class="p_cost"><? print_r($cost)?>₽</p>       
             </div>
         </div>
+        <div class="reviews">
+        <h2 class="reviews_h2">Отзывы:</h2>
+        <? $id_cactus = $_GET['id'];
+            include 'layouts/bd.php';
+            $stmt = $conn->prepare("SELECT rating.*, user.name AS name
+            FROM rating
+            JOIN user ON rating.id_user = user.id_user
+            WHERE rating.id_cactus = :id_cactus AND rating.status = 1");
+            $stmt->bindParam(':id_cactus', $id_cactus);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
+                <div class="cactus_review cactus_wrapp_search cactus_wrapp">
+                    <p class="user_rating_buy"><?= $row['name']?></p>
+                    <p class="user_rating_buy revie_text"><?= $row['description']?></p>
+                    <p class="user_rating_buy">Оценка:<?=' '.$row['rating']?></p>
+                    
+                </div>
+            <?}
+        ?>
+        </div>
+        </div>
     </main>
     <footer>
     <?php
@@ -109,6 +131,8 @@
             star.addEventListener('click', () => {
                 starRating = star.getAttribute('data-value');
                 dialogElement.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                document.body.style.maxHeight = '100%';
             });
             star.addEventListener('mouseover', function() {
                 stars.forEach((s, i) => {
@@ -122,10 +146,14 @@
         });
         buttonNoElement.addEventListener('click', function() {
             userInputText = textDialogElement.value;
+            document.body.style.overflow = 'auto';
+            document.body.style.maxHeight = '';
             window.location.href = `layouts/rating.php?id=${id}&star=${starRating}&text=${userInputText}`;
         });
         buttonYesElement.addEventListener('click', function() {
             userInputText = textDialogElement.value;
+            document.body.style.overflow = 'auto';
+            document.body.style.maxHeight = '';
             window.location.href = `layouts/rating.php?id=${id}&star=${starRating}&text=${userInputText}`;
         });
 });</script>

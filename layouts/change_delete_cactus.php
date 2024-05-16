@@ -105,6 +105,14 @@ if($_POST['submit_admin'] == 'update'){
     $conn = null;
     header("Location: ../admin_panel.php?id=7");
     die();
+}elseif($_POST['submit_admin'] == 'rating_status'){
+    include 'bd.php'; 
+    $rating_text = $_POST['rating_text'];
+    $id_rating = $_POST['id_rating'];
+    $stmt = $conn->prepare("UPDATE rating SET description = :rating_text, status = 1 WHERE id_rating = :id_rating");
+    $stmt->bindParam(':rating_text', $rating_text);
+    $stmt->bindParam(':id_rating', $id_rating);
+    $stmt->execute();
 }
 $id_page=$_POST['id_page'];
 $conn = null;
