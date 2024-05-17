@@ -100,10 +100,9 @@
             $stmt->execute();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
                 <div class="cactus_review cactus_wrapp_search cactus_wrapp">
-                    <p class="user_rating_buy"><?= $row['name']?></p>
+                    <p class="user_rating_buy user_rating_buy_name"><?= $row['name']?></p>
                     <p class="user_rating_buy revie_text"><?= $row['description']?></p>
                     <p class="user_rating_buy">Оценка:<?=' '.$row['rating']?></p>
-                    
                 </div>
             <?}
         ?>

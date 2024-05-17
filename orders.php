@@ -9,13 +9,11 @@
 </head>
 <body>
     <header>
-    <?php
-    include 'layouts/header.php';
-    ?>
+    <?include 'layouts/header.php';?>
     </header>
     <main>
         <div class="wrapp wrapp_orders">
-                <?php include 'layouts/orders_user.php';?>
+                <? include 'layouts/orders_user.php';?>
                 <?if(isset($_SESSION['has_basket'])){?>
             <div class="cost_bus has_basket has_basket2">
             <p>У вас нет заказов</p>
@@ -24,9 +22,7 @@
         </div>
     </main>
     <footer>
-    <?php
-    include 'layouts/footer.php';
-    ?>
+    <?include 'layouts/footer.php';?>
     </footer>
 </body>
 </html>

@@ -5,6 +5,10 @@ if (isset($_SESSION['user_name']) || isset($_SESSION['user_email'])) {
     include 'bd.php';
     $user_email = $_SESSION['user_email'];
     $user_name = $_SESSION['user_name'];
+    $fio=$_POST['name'];
+    $addres=$_POST['address'];
+    $tel=$_POST['phone'];
+    $email=$_POST['email'];
     
     $query = "SELECT id_user FROM user WHERE name = :user_name AND email = :user_email";
     $stmt = $conn->prepare($query);
@@ -24,12 +28,16 @@ if (isset($_SESSION['user_name']) || isset($_SESSION['user_email'])) {
         $time = new DateTime();
         $time = $time->format('Y-m-d H:i');
     
-        $insert_query = "INSERT INTO orders (id_user, id_cactus, number, status, time) VALUES (:id_user, :id_cactus, :number, 0, :time)";
+        $insert_query = "INSERT INTO orders (id_user, id_cactus, number, status, time, fio, addres, tel, email) VALUES (:id_user, :id_cactus, :number, 0, :time, :fio, :addres, :tel, :email)";
         $stmt = $conn->prepare($insert_query);
         $stmt->bindParam(':id_user', $id_user);
         $stmt->bindParam(':id_cactus', $id_cactus);
         $stmt->bindParam(':number', $number);
         $stmt->bindParam(':time', $time);
+        $stmt->bindParam(':fio', $fio);
+        $stmt->bindParam(':addres', $addres);
+        $stmt->bindParam(':tel', $tel);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
     
         $delete_query = "DELETE FROM basket WHERE id_user = :id_user";

@@ -124,8 +124,12 @@ include 'layouts/header.php';
             <tr>
                 <th class="admin_th">id заказа</th>
                 <th class="admin_th">id пользователя</th>
+                <th class="admin_th">ФИО заказчика</th>
                 <th class="admin_th">Товар</th>
                 <th class="admin_th">Количество</th>
+                <th class="admin_th">Телефон заказчика</th>
+                <th class="admin_th">Адрес заказчика</th>
+                <th class="admin_th">Почта заказчика</th>
                 <th class="admin_th">Статус</th>
                 <th class="admin_th">Время заказа</th>
             </tr>
@@ -135,10 +139,14 @@ include 'layouts/header.php';
                     $stmt->bindParam(':id_cactus', $order['id_cactus']);
                     $stmt->execute();
                     $result = $stmt->fetchColumn();?>
-                <td class='td_admin'><?php echo $order['id_order']; ?></td>
-                <td class='td_admin'><?php echo $order['id_user']; ?></td>
-                <td class='td_admin'><?php echo $result; ?></td>
-                <td class='td_admin'><?php echo $order['number']; ?></td>
+                <td class='td_admin'><?echo $order['id_order']; ?></td>
+                <td class='td_admin'><?echo $order['id_user']; ?></td>
+                <td class='td_admin'><?echo $order['fio']; ?></td>
+                <td class='td_admin'><?echo $result; ?></td>
+                <td class='td_admin'><?echo $order['number']; ?></td>
+                <td class='td_admin'><?echo $order['tel']; ?></td>
+                <td class='td_admin'><?echo $order['addres']; ?></td>
+                <td class='td_admin'><?echo $order['email']; ?></td>
                 <td class='td_admin'><?
                     if($order['status']==0){?>
                         <form action="layouts/change_delete_cactus.php" method="post" class="status_form">
