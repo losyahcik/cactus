@@ -142,6 +142,10 @@
                     }
                 });
             });
+            star.addEventListener('click', () => {
+                window.scrollTo(0, 0);
+                document.body.style.overflow = 'hidden';
+            });
         });
         buttonNoElement.addEventListener('click', function() {
             userInputText = textDialogElement.value;

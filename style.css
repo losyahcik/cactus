@@ -42,7 +42,9 @@ body{
 
 .dialog_buttons{
     margin-top: 20px;
-    width: 250px;
+    width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
     display: flex;
     justify-content: space-between;
 }
