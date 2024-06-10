@@ -13,7 +13,7 @@
     include 'layouts/header.php';
     ?>
     </header>
-    <main>
+    <main class="main_search">
         <div class=" wrapp_search wrapp_index">
            <? include 'layouts/bd.php';
            if(isset($_POST['search'])) {
