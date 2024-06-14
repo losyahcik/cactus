@@ -12,11 +12,12 @@ if (isset($_GET['id'])) {
         $stmt->execute();
       
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      
+
         if ($row) {
           $title = $row['title'];
           $description = $row['description'];
           $cost = $row['cost'];
+          $stock = $row['stock'];
           $photo = base64_encode($row['photo']);
         } else {
           echo "Запись не найдена";

@@ -28,10 +28,13 @@
         <div class="buy_wrapp_main">
         <div class="buy_wrapp">
             <div class="buy_photo">
-                <img class="cactus_image_buy" src="data:image/jpeg;base64, <?php print_r($photo)?>"/>
+                <img class="cactus_image_buy" src="data:image/jpeg;base64, <? print_r($photo)?>"/>
                 <form method="POST" action="layouts/basket_update.php" class="basket_form">
-                    <input type="hidden" name="hidden" value="<?php echo $_GET['id'] ?>">
-                    <button type="submit" class='buy_but' name="buttonn">Добавить в корзину</button>
+                    <input type="hidden" name="hidden" value="<? echo $_GET['id'] ?>">
+                    <? if(($stock==0) || ($stock==NULL)){?>
+                        <div class='error_stock' name="buttonn">Товара временно нет на складе</div>
+                    <?}else{ ?>
+                    <button type="submit" class='buy_but' name="buttonn">Добавить в корзину</button><?}?>
                 </form>
             </div>
             <div class="buy_description">

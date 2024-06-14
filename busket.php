@@ -36,8 +36,10 @@
     <?}else{?>
 <div class="cost_bus">
     <p>Итого:<? include 'layouts/cost_count.php'?>₽</p>
-    <div class="orders_but">
-        <button type="submit" id="create_order" class='buy_but but_bus' name="buttonn">Заказать</button>
+    <div class="orders_but"><?
+        if(isset($_SESSION['erorr'])){?>
+        <div class="error_stock">Нельзя оформить заказ</div><?}else{?>
+        <button type="submit" id="create_order" class='buy_but but_bus' name="buttonn">Заказать</button><?}?>
     </div>
 </div><?}?>
 </div>
@@ -48,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const dialogElement = document.getElementById('dialog');
     const close = document.querySelector('.close_form');
     order.addEventListener('click', () => {
+        order.style.display = 'none';
         dialogElement.style.display = 'flex';
         document.body.style.overflow = 'hidden';
         document.body.style.maxHeight = '100%';
@@ -56,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     });
     close.addEventListener('click', () => {
+        order.style.display = 'block';
         dialogElement.style.display = 'none';
         document.body.style.overflow = 'auto';
         document.body.style.maxHeight = '';

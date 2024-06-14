@@ -181,7 +181,6 @@ header{
 
 .tel{
     font-size: 23px;
-    font-size: 700;
 }
 
 
@@ -392,7 +391,6 @@ form{
     margin-top: 25px;
     border-radius: 15px;
     font-size: 30px;
-    font-weight: medium;
     transition: all .2s ease-out;
     border: none;
 }
@@ -752,6 +750,7 @@ form{
 }
 
 .input_search{
+    padding-right: 10px;
     width: 100%;
 }
 
@@ -940,4 +939,10 @@ form{
     font-size: 24px;
     width: 200px;
     text-align: center;
+}
+
+.error_stock{
+    color: #FF5555;
+    font-weight: 700;
+    font-size: 26px;
 }

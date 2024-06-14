@@ -26,7 +26,7 @@ if (isset($_SESSION['user_name']) || isset($_SESSION['user_email'])) {
         $id_cactus = $basket_row['id_cactus'];
         $number = $basket_row['number'];
         $time = new DateTime();
-        $time = $time->format('Y-m-d H:i');
+        $time = $time->format('d-m-Y H:i');
     
         $insert_query = "INSERT INTO orders (id_user, id_cactus, number, status, time, fio, addres, tel, email) VALUES (:id_user, :id_cactus, :number, 0, :time, :fio, :addres, :tel, :email)";
         $stmt = $conn->prepare($insert_query);
@@ -38,6 +38,12 @@ if (isset($_SESSION['user_name']) || isset($_SESSION['user_email'])) {
         $stmt->bindParam(':addres', $addres);
         $stmt->bindParam(':tel', $tel);
         $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $update_query = "UPDATE cactus SET stock = stock - :number WHERE id_cactus = :id_cactus";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bindParam(':number', $number);
+        $stmt->bindParam(':id_cactus', $id_cactus);
         $stmt->execute();
     
         $delete_query = "DELETE FROM basket WHERE id_user = :id_user";

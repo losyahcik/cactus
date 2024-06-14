@@ -67,7 +67,13 @@ function basket_update(){
     echo '<p class="cactus_p cactus_title">' . $row_product['title'] . '</p>';
     echo '<p class="cactus_p cactus_cost">' . $row_product['cost'] .'₽'. '</p>';
     echo '<p class="cactus_p cactus_cost">' . $row_basket['number'] .'шт.'. '</p>';     
-    echo '</div>';   
+    echo '</div>';  
+    if($row_product['stock'] < $row_basket['number']){
+        $_SESSION['erorr']='error';
+        echo '<p class="cactus_p cactus_title error"> В нужном колличестве товара нет на складе </p>';
+    }else{
+        unset ( $_SESSION['erorr']); 
+    }
     echo '<form method="POST" action="" class="basket_form no_order_form ">';
     echo '<button type="submit" class="no_order" name="buttonn">Удалить</button>';
     echo '<input type="hidden" name="form_id" value='.$row_basket['id_basket'].'>';              
