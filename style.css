@@ -941,6 +941,10 @@ form{
     text-align: center;
 }
 
+.slide2,.slide3{
+    display: none;
+}
+
 .error_stock{
     color: #FF5555;
     font-weight: 700;
