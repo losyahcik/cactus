@@ -23,6 +23,11 @@ try {
             $_SESSION['password']=$password;
             $_SESSION['user_email']=$email;
             $_SESSION['user_name'] = $name;
+            }else{
+                session_start();
+                $_SESSION['error']='Пользователя с такими данными не существует';
+                header('Location: avtoristion.php');
+                die();  
             }
         } else {
             session_start();
